@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+        <script>
+          function checkvals(name, bdate) {
+            name = document.getElementById("name").value;
+            bdate = document.getElementById("birthdate").value;
+            console.log(name);
+            console.log(bdate);
+          }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+              <form action="/" method="post">
+                <fieldset>
+                  <legend>Add a Birthday:</legend>
+                  <label for="name">name:</label>
+                  <input type="text" autocomplete="off" id="name" name="name"><br><br>
+                  <label for="birthdate">date:</label>
+                  <input type="date" id="birthdate" name="birthdate"><br><br>
+                  <input type="submit" value="Submit">
+                </fieldset>
+              </form>
+              <!-- <button type="button" onclick="checkvals()">debug</button> -->
+            </div>
+
+            <div class="section">
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                      <td> example </td><td> 1 </td><td>4</td>
+                      </tr>
+                      {% block bdayt %}{% endblock %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

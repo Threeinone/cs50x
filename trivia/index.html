@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+          function correct(id)
+          {
+            answer = document.getElementById(id);
+            answer.style.backgroundColor = 'green';
+            answer.style.color = 'white';
+            // answer.innerHTML = 'Correct!';
+            if (id.includes('button'))
+              {
+                document.getElementById('grade1').innerHTML = "Correct!";
+              } else {
+                document.getElementById('grade2').innerHTML = "Correct!";
+              }
+          }
+
+          function incorrect(id)
+          {
+            answer = document.getElementById(id);
+            answer.style.backgroundColor = 'red';
+            answer.style.color = 'white';
+            // answer.innerHTML = 'Incorrect!';
+            if (id.includes('button'))
+              {
+                document.getElementById('grade1').innerHTML = "Incorrect!";
+              } else {
+                document.getElementById('grade2').innerHTML = "Incorrect!";
+              }
+          }
+          function checkans()
+          {
+            answer = document.getElementById('submission').value
+            if (answer.toLowerCase() == 'correct')
+            {
+              correct('submission');
+            } else {
+              incorrect('submission');
+            }
+          }
+
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3> Example question? </h3>
+                <button type="submit" id="button1" onclick="correct('button1')">answer1</button>
+                <button type="submit" id="button2" onclick="incorrect('button2')">answer2</button>
+                <button type="submit" id="button3" onclick="incorrect('button3')">answer3</button>
+                <p id="grade1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3> Example question 2? </h3>
+                <input autocomplete="off" type="text" id="submission" placeholder="answer here" onload="document.getElementById('submission').value = '';"></input>
+                <button onclick="checkans()">submit</button>
+                <p id="grade2"></p>
+            </div>
+        </div>
+    </body>
+</html>
