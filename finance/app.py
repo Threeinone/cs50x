@@ -1,3 +1,4 @@
+# module boilerplate {{{
 import os
 
 import sqlite3
@@ -6,6 +7,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import apology, login_required, lookup, usd
+# }}}
 
 # Configure application
 app = Flask(__name__)
@@ -19,6 +21,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 db = sqlite3.connect("finance.db", check_same_thread=False)
+db.row_factory = sqlite3.Row
 cur = db.cursor()
 
 @app.after_request
@@ -69,16 +72,17 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = cur.execute("SELECT * FROM users WHERE username = ?", (request.form['username'],)).fetchall()
+        users = cur.execute("SELECT * FROM users WHERE username = ?"
+                            , (request.form['username'],)).fetchall()
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(
-            rows[0][2], request.form.get("password")
-        ):
+        if len(users) < 1:
             return apology("invalid username and/or password", 403)
-
-        # Remember which user has logged in
-        session["user_id"] = rows[0][0]
+        else:
+            for user in users:
+                if check_password_hash( user["hash"], request.form.get("password") ):
+                    # Remember which user has logged in
+                    session["user_id"] = user["id"]
 
         # Redirect user to home page
         return redirect("/")
@@ -103,7 +107,14 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return render_template("quote.html")
+    if request.method == "GET":
+        return render_template("quote.html")
+    else:
+        quote = lookup(request.form["symbol"])
+        if quote:
+            return render_template("quoted.html", quote=quote)
+        else:
+            return apology("bad symbol", 403)
 
 
 @app.route("/register", methods=["GET", "POST"])

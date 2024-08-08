@@ -2,4 +2,13 @@
 
 {% block title %} Quote {% endblock %}
 
+{% block main %}
+<form action="/quote" method="post">
+  <div class="mb-3">
+    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Stock Tag" type="text">
+  </div>
+</form>
+<hr><br>
+{% block quote %}{% endblock %}
 
+{% endblock %}

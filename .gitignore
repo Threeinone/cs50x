@@ -1,0 +1,3 @@
+flask_session
+*.o
+__pychache__
