@@ -5,24 +5,27 @@ Purchase Stock
 
 {% block main %}
 <form action="/buy" method="post">
-  <div class="mb-3">
-    <input list="exampleSymbols" autofocus class="form-control mx-auto w-auto"
-    name="symbol" placeholder="Stock Tag" type="text">
-    <datalist id="exampleSymbols">
-      <option value="NFLX">
-      <option value="TSLA">
-      <option value="WMT">
-      <option value="DELL">
-      <option value="ADSK">
-      <option value="BP">
-    </datalist>
-  </div>
-  <div class="mb-3">
-    <input class="form-control mx-auto w-auto" name="amount"
-    placeholder="Amount" type="number">
-  </div>
-  <div class="mb-3 col-auto">
-    <button type="submit" class="btn btn-primary">Purchase</button>
-  </div>
+  <fieldset>
+    <legend>Buy Stock</legend>
+    <div class="mb-3">
+      <input list="exampleSymbols" autofocus class="form-control mx-auto w-auto"
+      name="symbol" placeholder="Stock Tag" type="text">
+      <datalist id="exampleSymbols">
+        <option value="NFLX">
+        <option value="TSLA">
+        <option value="WMT">
+        <option value="DELL">
+        <option value="ADSK">
+        <option value="BP">
+      </datalist>
+    </div>
+    <div class="mb-3">
+      <input class="form-control mx-auto w-auto" name="amount"
+      placeholder="Amount" type="number">
+    </div>
+    <div class="mb-3 col-auto">
+      <button type="submit" class="btn btn-primary">Purchase</button>
+    </div>
+  </fieldset>
 </form>
 {% endblock %}

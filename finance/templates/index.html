@@ -28,8 +28,15 @@
       {% for stock in stocks %}
       <tr>
         <td>{{ stock["symbol"] }}</td>
-        <td {%if stock["greater"] %} style="color: green;" {% endif %}
-          >{{ stock["price"] | usd }}</td>
+        <td
+          {% if stock["value"] > 0 %}
+          style="color: green;">▲ 
+          {% elif stock["value"] < 0 %}
+          style="color: red;">▼
+          {% else %}
+          >
+          {% endif %}
+          {{ stock["price"] | usd }}</td>
         <td>{{ stock["owned"] }}</td>
       </tr>
       {% endfor %}

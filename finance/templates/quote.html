@@ -3,8 +3,10 @@
 {% block title %} Quote {% endblock %}
 
 {% block main %}
-<form action="/quote" method="post">
-  <div class="mb-3">
+<div class="mb-3">
+  <form action="/quote" method="post">
+    <fieldset>
+      <legend>Current Stock Prices</legend>
     <input list="exampleSymbols" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Stock Tag" type="text">
     <datalist id="exampleSymbols">
       <option value="NFLX">
@@ -13,9 +15,13 @@
       <option value="DELL">
       <option value="ADSK">
       <option value="BP">
-  </div>
-</form>
-<hr><br>
-{% block quote %}{% endblock %}
+    </datalist>
+      <br>
+      <input class="form-control mx-auto w-auto" type="submit" value="submit">
+    </fieldset>
+  </form>
+</div>
+  <hr><br>
+  {% block quote %}{% endblock %}
 
-{% endblock %}
+  {% endblock %}
