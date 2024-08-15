@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %} Sell {% endblock %}
+
+{% block main %}
+<div class="section mb-3 col-auto">
+  <form action="/sell" method="post">
+    <fieldset>
+      <legend>Sell Stock</legend>
+      <label for="symbol">Choose a stock:</label>
+      <select class="form-control mx-auto w-auto" name="symbol" id="symbol" required>
+        {% for symbol in symbols %}
+        <option value="{{ symbol }}">{{ symbol }}</option>
+        {% endfor %}
+      </select>
+      <br>
+      <input class="form-control mx-auto w-auto" type="number" name="amount" id="amount" placeholder="Amount">
+      <br>
+      <input class="form-control mx-auto w-auto" type="submit" value="submit">
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

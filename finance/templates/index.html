@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+
+<div class="header">
+
+  <h2>{{ user["username"] }}</h2> <p>current cash: {{ user["cash"] | usd }}</p>
+
+  </div>
+  <br><hr><br>
+<div class="container">
+
+  <div class="section">
+
+    <h2>Stocks Owned</h2>
+    <br>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Symbol</th>
+          <th scope="col">Stock Price</th>
+          <th scope="col">Amount owned</th>
+        </tr>
+      </thead>
+      {% for stock in stocks %}
+      <tr>
+        <td>{{ stock["symbol"] }}</td>
+        <td {%if stock["greater"] %} style="color: green;" {% endif %}
+          >{{ stock["price"] | usd }}</td>
+        <td>{{ stock["owned"] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+</div>
+
+{% endblock %}
