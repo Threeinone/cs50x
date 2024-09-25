@@ -76,12 +76,13 @@ def buy():
         amount = int(request.form["amount"])
         cash = cur.execute("SELECT cash FROM users WHERE id = ?",
                            (session["user_id"],)).fetchone()["cash"]
-        ## could return None and break something
-        ## I don't care
-        price = lookup(symbol)["price"]
+        try:
+            price = lookup(symbol)["price"]
+        except:
+            return apology("bad symbol", 403)
         time = datetime.now(timezone('America/New_York')).timetuple()
 
-        if not (price or amount):
+        if not amount or amount < 1:
             return apology("bad input", 403)
         if (cash < (price * amount)):
             return apology("too poor", 403)
